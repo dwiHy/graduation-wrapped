@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Graduation Wrapped</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     * {
       box-sizing: border-box;
@@ -149,7 +150,7 @@
   </div>
 
   <div class="controls">
-    <input type="text" id="searchInput" placeholder="Search student name...">
+    <input type="text" id="searchInput" placeholder="Search by name...">
     <select id="classFilter">
       <option value="">All Classes</option>
       <option value="9.1">9.1</option>
@@ -168,8 +169,8 @@
     <div class="modal-content">
       <img id="modalPhoto" src="" alt="Student Photo">
       <h2 id="modalName"></h2>
+      <p id="modalNISN"></p>
       <p id="modalClass"></p>
-      <p id="modalNisn"></p>
       <p id="modalStatus"></p>
       <button class="modal-close" onclick="closeModal()">Close</button>
     </div>
@@ -182,40 +183,18 @@
   <script>
     const students = [
       {
-        name: "Felisha Jesslyn",
+        name: "Alya Putri",
+        nisn: "1234567890",
         class: "9.1",
-        nisn: "7875",
-        status: "LULUS",
-        photo: "felicia-jeslyn.JPG"
-       
+        status: "Graduated",
+        photo: "https://via.placeholder.com/300x250.png?text=Alya+Putri"
       },
       {
-        name: "Richardo Ivanox",
-        class: "9.1",
-         nisn: "7875",
-        status: "LULUS",
-        photo: "images/rokaldo.JPG"
-      },
-       {
-        name: "Cristian Maranatha Siburian",
-        class: "9.1",
-         nisn: "7875",
-        status: "LULUS",
-        photo: "images/cristian.JPG"
-      },
-      {
-        name: "Chintia Cordelia",
-        class: "9.1",
-         nisn: "7875",
-        status: "LULUS",
-        photo: "images/chintia.JPG"
-      },
-       {
-        Nama  : "Chintia Cordelia",
-        Kelas : "9.1",
-        nisn: "7875",
-        status: "LULUS",
-        photo: "images/chintia.JPG"
+        name: "Budi Santoso",
+        nisn: "0987654321",
+        class: "9.2",
+        status: "Graduated",
+        photo: "https://via.placeholder.com/300x250.png?text=Budi+Santoso"
       },
     ];
 
@@ -224,19 +203,24 @@
     const classFilter = document.getElementById('classFilter');
     const modal = document.getElementById('studentModal');
     const modalName = document.getElementById('modalName');
+    const modalNISN = document.getElementById('modalNISN');
     const modalClass = document.getElementById('modalClass');
-    const modalNisn = document.getElementById('modalNisn');
     const modalStatus = document.getElementById('modalStatus');
     const modalPhoto = document.getElementById('modalPhoto');
 
     function openModal(student) {
       modalName.textContent = student.name;
-      modalClass.textContent = `Kelas  : ${student.class}`;
-      modalNisn.textContent = `NISN    : ${student.nisn}`;
+      modalNISN.textContent = `NISN: ${student.nisn}`;
+      modalClass.textContent = `Class: ${student.class}`;
       modalStatus.textContent = `Status: ${student.status}`;
       modalPhoto.src = student.photo;
       modalPhoto.alt = student.name;
       modal.style.display = 'flex';
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
     }
 
     function closeModal() {
