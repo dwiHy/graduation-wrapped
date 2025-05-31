@@ -183,18 +183,25 @@
   <script>
     const students = [
       {
-        name: "Alya Putri",
-        nisn: "1234567890",
+        name: "Felisha Jesslyn",
+        nisn: "7875",
         class: "9.1",
-        status: "Graduated",
-        photo: "https://via.placeholder.com/300x250.png?text=Alya+Putri"
+        status: "LULUS",
+        photo: "images/felicia-jeslyn.JPG"
       },
       {
-        name: "Budi Santoso",
-        nisn: "0987654321",
-        class: "9.2",
-        status: "Graduated",
-        photo: "https://via.placeholder.com/300x250.png?text=Budi+Santoso"
+        name: "Richardo Ivanox",
+        nisn: "7975",
+        class: "9.1",
+        status: "LULUS",
+        photo: "rokaldo.JPG"
+      },
+       {
+        name: "Cristian Maranatha Siburian",
+        nisn: "7841",
+        class: "9.1",
+        status: "LULUS",
+        photo: "cristian.JPG"
       },
     ];
 
@@ -210,8 +217,8 @@
 
     function openModal(student) {
       modalName.textContent = student.name;
-      modalNISN.textContent = `NISN: ${student.nisn}`;
-      modalClass.textContent = `Class: ${student.class}`;
+      modalNISN.textContent = `No Induk: ${student.nisn}`;
+      modalClass.textContent = `Class  : ${student.class}`;
       modalStatus.textContent = `Status: ${student.status}`;
       modalPhoto.src = student.photo;
       modalPhoto.alt = student.name;
