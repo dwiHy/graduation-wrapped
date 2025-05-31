@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graduation Wrapped</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #1DB954;
+      padding: 1rem;
+    }
+    h1, h2, h3 {
+      margin: 0;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .header h1 {
+      font-size: 2.2rem;
+    }
+    .header h2 {
+      font-size: 1.5rem;
+      color: #ccc;
+      margin-top: 0.3rem;
+    }
+    .header h3 {
+      font-size: 1.2rem;
+      color: #888;
+      margin-top: 0.2rem;
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    input, select {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+    }
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background-color: #111;
+      border: 1px solid #1DB954;
+      border-radius: 10px;
+      overflow: hidden;
+      text-align: center;
+      color: #fff;
+      cursor: pointer;
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card h3 {
+      margin: 0.5rem 0 0;
+      font-size: 1.1rem;
+    }
+    .card p {
+      margin: 0 0 1rem;
+      color: #1DB954;
+    }
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 1rem;
+    }
+    .modal-content {
+      background-color: #111;
+      color: #1DB954;
+      padding: 2rem 1rem;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+    .modal-content img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    .modal-content h2 {
+      margin-bottom: 0.5rem;
+    }
+    .modal-content p {
+      margin: 0.5rem 0;
+    }
+    .modal-close {
+      margin-top: 1rem;
+      background: #1DB954;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #1DB954;
+      text-align: center;
+      color: #ccc;
+    }
+    @media (max-width: 600px) {
+      .header h1 {
+        font-size: 1.6rem;
+      }
+      .header h2 {
+        font-size: 1.2rem;
+      }
+      .header h3 {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Graduation Wrapped</h1>
+    <h2>SMPS Santo Tarcisius</h2>
+    <h3>Class of 2025</h3>
+  </div>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Search student name...">
+    <select id="classFilter">
+      <option value="">All Classes</option>
+      <option value="9.1">9.1</option>
+      <option value="9.2">9.2</option>
+      <option value="9.3">9.3</option>
+      <option value="9.4">9.4</option>
+      <option value="9.5">9.5</option>
+      <option value="9.6">9.6</option>
+      <option value="9.7">9.7</option>
+    </select>
+  </div>
+
+  <div class="card-container" id="studentList"></div>
+
+  <div class="modal" id="studentModal">
+    <div class="modal-content">
+      <img id="modalPhoto" src="" alt="Student Photo">
+      <h2 id="modalName"></h2>
+      <p id="modalClass"></p>
+      <p id="modalStatus"></p>
+      <button class="modal-close" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>Congratulations on your graduation! Keep dreaming, keep striving, and shape a bright future ahead. May you bring positive change wherever you go.</p>
+  </footer>
+
+  <script>
+    const students = [
+      {
+        name: "Alya Putri",
+        class: "9.1",
+        status: "Graduated",
+        photo: "https://via.placeholder.com/300x250.png?text=Alya+Putri"
+      },
+      {
+        name: "Budi Santoso",
+        class: "9.2",
+        status: "Graduated",
+        photo: "https://via.placeholder.com/300x250.png?text=Budi+Santoso"
+      },
+    ];
+
+    const studentList = document.getElementById('studentList');
+    const searchInput = document.getElementById('searchInput');
+    const classFilter = document.getElementById('classFilter');
+    const modal = document.getElementById('studentModal');
+    const modalName = document.getElementById('modalName');
+    const modalClass = document.getElementById('modalClass');
+    const modalStatus = document.getElementById('modalStatus');
+    const modalPhoto = document.getElementById('modalPhoto');
+
+    function openModal(student) {
+      modalName.textContent = student.name;
+      modalClass.textContent = `Class: ${student.class}`;
+      modalStatus.textContent = `Status: ${student.status}`;
+      modalPhoto.src = student.photo;
+      modalPhoto.alt = student.name;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    function displayStudents() {
+      const keyword = searchInput.value.toLowerCase();
+      const selectedClass = classFilter.value;
+
+      const filtered = students.filter(s => {
+        const matchName = s.name.toLowerCase().includes(keyword);
+        const matchClass = !selectedClass || s.class === selectedClass;
+        return matchName && matchClass;
+      });
+
+      studentList.innerHTML = filtered.map(s => `
+        <div class="card" onclick='openModal(${JSON.stringify(s)})'>
+          <img src="${s.photo}" alt="${s.name}">
+          <h3>${s.name}</h3>
+          <p>Class ${s.class}</p>
+        </div>
+      `).join('');
+    }
+
+    searchInput.addEventListener('input', displayStudents);
+    classFilter.addEventListener('change', displayStudents);
+
+    window.addEventListener('click', function(e) {
+      if (e.target === modal) closeModal();
+    });
+
+    displayStudents();
+  </script>
+</body>
+</html>
