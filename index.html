@@ -169,6 +169,7 @@
       <img id="modalPhoto" src="" alt="Student Photo">
       <h2 id="modalName"></h2>
       <p id="modalClass"></p>
+      <p id="modalNisn"></p>
       <p id="modalStatus"></p>
       <button class="modal-close" onclick="closeModal()">Close</button>
     </div>
@@ -181,32 +182,38 @@
   <script>
     const students = [
       {
-        Nama  : "Felisha Jesslyn",
-        Kelas : "9.1",
+        name: "Felisha Jesslyn",
+        class: "9.1",
+        nisn: "7875",
         status: "LULUS",
         photo: "felicia-jeslyn.JPG"
+       
       },
       {
-        Nama  : "Richardo Ivanox",
-        Kelas : "9.1",
+        name: "Richardo Ivanox",
+        class: "9.1",
+         nisn: "7875",
         status: "LULUS",
         photo: "images/rokaldo.JPG"
       },
        {
-        Nama  : "Cristian Maranatha Siburian",
-        Kelas : "9.1",
+        name: "Cristian Maranatha Siburian",
+        class: "9.1",
+         nisn: "7875",
         status: "LULUS",
         photo: "images/cristian.JPG"
       },
       {
-        Nama  : "Chintia Cordelia",
-        Kelas : "9.1",
+        name: "Chintia Cordelia",
+        class: "9.1",
+         nisn: "7875",
         status: "LULUS",
         photo: "images/chintia.JPG"
       },
        {
         Nama  : "Chintia Cordelia",
         Kelas : "9.1",
+        nisn: "7875",
         status: "LULUS",
         photo: "images/chintia.JPG"
       },
@@ -218,12 +225,14 @@
     const modal = document.getElementById('studentModal');
     const modalName = document.getElementById('modalName');
     const modalClass = document.getElementById('modalClass');
+    const modalNisn = document.getElementById('modalNisn');
     const modalStatus = document.getElementById('modalStatus');
     const modalPhoto = document.getElementById('modalPhoto');
 
     function openModal(student) {
       modalName.textContent = student.name;
-      modalClass.textContent = `Class: ${student.class}`;
+      modalClass.textContent = `Kelas  : ${student.class}`;
+      modalNisn.textContent = `NISN    : ${student.nisn}`;
       modalStatus.textContent = `Status: ${student.status}`;
       modalPhoto.src = student.photo;
       modalPhoto.alt = student.name;
