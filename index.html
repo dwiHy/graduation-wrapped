@@ -194,14 +194,14 @@
         nisn: "7975",
         class: "9.1",
         status: "LULUS",
-        photo: "rokaldo.JPG"
+        photo: "images/rokaldo.JPG"
       },
        {
         name: "Cristian Maranatha Siburian",
         nisn: "7841",
         class: "9.1",
         status: "LULUS",
-        photo: "cristian.JPG"
+        photo: "images/cristian.JPG"
       },
     ];
 
@@ -218,7 +218,7 @@
     function openModal(student) {
       modalName.textContent = student.name;
       modalNISN.textContent = `No Induk: ${student.nisn}`;
-      modalClass.textContent = `Class  : ${student.class}`;
+      modalClass.textContent = `Kelas  : ${student.class}`;
       modalStatus.textContent = `Status: ${student.status}`;
       modalPhoto.src = student.photo;
       modalPhoto.alt = student.name;
